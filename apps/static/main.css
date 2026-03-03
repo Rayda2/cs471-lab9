@@ -1,0 +1,62 @@
+body {
+    font-family: Arial;
+}
+
+.custom-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    background-color: lightblue;
+    color: black;
+}
+    .custom-link:hover {
+        background-color: blue;
+        color: white;
+    }
+
+    .custom-link:visited {
+        color: purple;
+    }
+
+    .custom-link:active {
+        background-color: red;
+    }
+
+.custom2-link {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    background-color: darkolivegreen;
+    color: black;
+}
+
+    .custom2-link:hover {
+        background-color: lightgreen;
+        color: white;
+    }
+
+    .custom2-link:visited {
+        color: purple;
+    }
+
+    .custom2-link:active {
+        background-color: red;
+    }
+
+
+#main-title {
+    text-align: center;
+    color: darkgreen;
+}
+
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
