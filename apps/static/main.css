@@ -2,46 +2,54 @@ body {
     font-family: Arial;
 }
 
-.custom-link {
-    display: block;
-    padding: 10px;
+#link1{
+    background-color: #98d3a7;
+    padding: 20px;
     text-align: center;
-    background-color: lightblue;
-    color: black;
-}
-    .custom-link:hover {
-        background-color: blue;
-        color: white;
-    }
-
-    .custom-link:visited {
-        color: purple;
-    }
-
-    .custom-link:active {
-        background-color: red;
-    }
-
-.custom2-link {
     display: block;
-    padding: 10px;
-    text-align: center;
-    background-color: darkolivegreen;
-    color: black;
 }
 
-    .custom2-link:hover {
-        background-color: lightgreen;
-        color: white;
-    }
+.link2{
+    background-color: #5a5a5a;
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
 
-    .custom2-link:visited {
-        color: purple;
-    }
+.link3 {
+    background-color: black;
+    padding: 20px;
+    text-align: center;
+    display: block;
+}
 
-    .custom2-link:active {
-        background-color: red;
-    }
+/* link colors */
+
+#link1 a{
+    color: red;
+}
+
+.link2 a {
+    color: gold;
+}
+
+.link3 a {
+    color: white;
+}
+
+/* link states */
+
+a:visited {
+    opacity: 0.8;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    color: blue;
+}
 
 
 #main-title {
@@ -49,6 +57,20 @@ body {
     color: darkgreen;
 }
 
+.title {
+    background-color: #5f9ea0;
+    color: white;
+    padding: 15px;
+    font-size: 32px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+ol {
+    margin-left: 25px;
+}
 
 table, th, td {
     border: 1px solid black;
@@ -60,3 +82,4 @@ table, th, td {
 th {
     background-color: #f2f2f2;
 }
+
