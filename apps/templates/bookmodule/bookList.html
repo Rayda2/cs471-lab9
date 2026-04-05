@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Results {% endblock %}
+
+{% block content %}
+
+<h1>Search Results</h1>
+
+{% for book in books %}
+<h3>{{ book.title }}</h3>
+<p>{{ book.author }}</p>
+<hr>
+{% empty %}
+<p>No results found</p>
+{% endfor %}
+
+{% endblock %}

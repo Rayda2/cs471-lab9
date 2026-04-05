@@ -45,3 +45,33 @@ def listing(request):
 
 def tables(request):
     return render(request, 'bookmodule/html5/tables.html')
+
+
+
+def __getBooksList():
+    return [
+        {'id':1, 'title':'Continuous Delivery', 'author':'J.Humble'},
+        {'id':2, 'title':'Reverse Engineering', 'author':'E. Eilam'},
+        {'id':3, 'title':'Machine Learning Book', 'author':'Burkov'}
+    ]
+
+def search(request):
+
+    if request.method == "POST":
+        string = request.POST.get('keyword').lower()
+        isTitle = request.POST.get('option1')
+        isAuthor = request.POST.get('option2')
+
+        books = __getBooksList()
+        newBooks = []
+
+        for item in books:
+            if isTitle and string in item['title'].lower():
+                newBooks.append(item)
+            elif isAuthor and string in item['author'].lower():
+                newBooks.append(item)
+
+        return render(request, 'bookmodule/bookList.html', {'books': newBooks})
+
+
+    return render(request, 'bookmodule/search.html')
