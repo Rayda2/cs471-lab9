@@ -1,17 +1,23 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Results {% endblock %}
-
 {% block content %}
 
-<h1>Search Results</h1>
 
-{% for book in books %}
-<h3>{{ book.title }}</h3>
-<p>{{ book.author }}</p>
+<h1>Books</h1>
+
+{% for obj in books %}
+    ID: {{ obj.id }}
+<br>
+    Title: {{ obj.title }}
+<br>
+    Author: {{ obj.author }}
+<br>
+    Price: {{ obj.price }}
+<br>
+    Edition: {{ obj.edition }}
+<br>
 <hr>
-{% empty %}
-<p>No results found</p>
 {% endfor %}
 
 {% endblock %}
+
