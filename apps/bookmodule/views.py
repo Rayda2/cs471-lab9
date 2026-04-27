@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Book
+from .models import Book, Publisher
 from django.db.models import Q, Count, Sum, Avg, Max, Min
-from .models import Student
+
 
 def index(request):
     name = request.GET.get("name") or "world!"
@@ -99,36 +99,45 @@ def lookup_query(request):
         return render(request, 'bookmodule/index.html')
 
 
+
+
 def task1(request):
-    books = Book.objects.filter(Q(price__lte=50))
+    total = Book.objects.aggregate(total=Sum('quantity'))['total']
+
+    books = Book.objects.all()
+
+    for b in books:
+        b.percent = (b.quantity / total) * 100 if total else 0
+
     return render(request, 'bookmodule/task1.html', {'books': books})
 
 def task2(request):
-    books = Book.objects.filter(
-        Q(edition__gt=2) & (Q(title__icontains='qu') | Q(author__icontains='qu'))
-    )
-    return render(request, 'bookmodule/task2.html', {'books': books})
+    data = Publisher.objects.annotate(total=Sum('book__quantity'))
+    return render(request, 'bookmodule/task2.html', {'data': data})
 
 def task3(request):
-    books = Book.objects.filter(
-        Q(edition__lte=2) & ~(Q(title__icontains='qu') | Q(author__icontains='qu'))
-    )
-    return render(request, 'bookmodule/task3.html', {'books': books})
+    data = Publisher.objects.annotate(oldest=Min('book__pubdate'))
+    return render(request, 'bookmodule/task3.html', {'data': data})
 
 def task4(request):
-    books = Book.objects.all().order_by('title')
-    return render(request, 'bookmodule/task4.html', {'books': books})
+    data = Publisher.objects.annotate(
+        avg=Avg('book__price'),
+        min=Min('book__price'),
+        max=Max('book__price')
+    )
+    return render(request, 'bookmodule/task4.html', {'data': data})
 
 def task5(request):
-    data = Book.objects.aggregate(
-        count=Count('id'),
-        total=Sum('price'),
-        avg=Avg('price'),
-        max=Max('price'),
-        min=Min('price'),
+    data = Publisher.objects.annotate(
+        high=Count('book', filter=Q(book__rating__gte=4))
     )
     return render(request, 'bookmodule/task5.html', {'data': data})
 
-def task7(request):
-    data = Student.objects.values('address__city').annotate(count=Count('id'))
-    return render(request, 'bookmodule/task7.html', {'data': data})
+def task6(request):
+    data = Publisher.objects.annotate(
+        count=Count(
+            'book',
+            filter=Q(book__price__gt=50, book__quantity__lt=5, book__quantity__gte=1)
+        )
+    )
+    return render(request, 'bookmodule/task6.html', {'data': data})
